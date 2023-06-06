@@ -21,9 +21,15 @@ public class BunTest {
     @Parameterized.Parameters
     public static Object[][] testData() {
         return new Object[][] {
-                {"delicious", 100},
-                {"black", 350},
-                {"new", 500}
+                {"Флюоресцентная булка R2-D3", 100},
+                {"", Float.MIN_VALUE},
+                {null, -Float.MAX_VALUE},
+                {String.format("%25c", ' ').replaceAll(" ", "\\" + "о")
+                + "чень дл" + String.format("%25c", ' ').replaceAll(" ", "\\" + "и")
+                + "нная стр" + String.format("%25c", ' ').replaceAll(" ", "\\" + "о")
+                + "ка", Float.MAX_VALUE},
+                {"!@#$%^&*()", 0},
+                {"Краторная булка N-200i", -0.01f}
         };
     }
 

@@ -6,8 +6,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
@@ -16,43 +20,50 @@ public class BurgerTest {
     Bun bun;
 
     @Mock
-    Ingredient ingredient;
-
-    @Mock
-    Burger burger;
+    Ingredient firstIngredient, secondIngredient, thirdIngredient;
 
     @Test
     public void setBuns() {
+        Burger burger = new Burger();
         burger.setBuns(bun);
-        Mockito.verify(burger).setBuns(bun);
+        assertEquals(bun, burger.bun);
     }
 
     @Test
     public void addIngredient() {
-        burger.addIngredient(ingredient);
-        burger.addIngredient(ingredient);
-        Mockito.verify(burger, Mockito.times(2)).addIngredient(ingredient);
+        Burger burger = new Burger();
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.addIngredient(thirdIngredient);
+        assertEquals(3, burger.ingredients.size());
     }
 
     @Test
     public void removeIngredient() {
-        burger.removeIngredient(1);
-        Mockito.verify(burger).removeIngredient(1);
+        Burger burger = new Burger();
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.removeIngredient(0);
+        assertEquals(1, burger.ingredients.size());
     }
 
     @Test
     public void moveIngredient() {
-        burger.moveIngredient(0, 1);
-        Mockito.verify(burger).moveIngredient(0, 1);
+        Burger burger = new Burger();
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
+        burger.addIngredient(thirdIngredient);
+        burger.moveIngredient(1, 0);
+        assertEquals(new ArrayList<>(Arrays.asList(secondIngredient, firstIngredient, thirdIngredient)), burger.ingredients);
     }
 
     @Test
     public void getPrice() {
         Burger burger = new Burger();
         burger.setBuns(bun);
-        burger.ingredients.add(ingredient);
+        burger.ingredients.add(firstIngredient);
         Mockito.when(bun.getPrice()).thenReturn(10f);
-        Mockito.when(ingredient.getPrice()).thenReturn(20f);
+        Mockito.when(firstIngredient.getPrice()).thenReturn(20f);
         float actual = burger.getPrice();
         assertThat(actual, equalTo(40f));
     }
