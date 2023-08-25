@@ -1,7 +1,8 @@
 ### Diplom_1 (Яндекс.Практикум, Автоматизатор тестирования на Java)
 
 Первая часть дипломного проекта, тестирование приложения Stellar Burger
-("https://stellarburgers.nomoreparties.site/")
+("https://stellarburgers.nomoreparties.site/").
+
 Юнит-тесты на классы Bun, Burger, Ingredient, IngredientType
 
 Задействованы инструменты:
